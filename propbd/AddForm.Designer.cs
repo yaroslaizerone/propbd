@@ -53,9 +53,11 @@ namespace propbd
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(107, 9);
+            this.label1.Font = new System.Drawing.Font("Segoe UI Symbol", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.ForeColor = System.Drawing.Color.Turquoise;
+            this.label1.Location = new System.Drawing.Point(74, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(86, 15);
+            this.label1.Size = new System.Drawing.Size(150, 25);
             this.label1.TabIndex = 0;
             this.label1.Text = "Новый клиент";
             // 
@@ -146,12 +148,13 @@ namespace propbd
             this.bt4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bt4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.bt4.ForeColor = System.Drawing.SystemColors.Control;
-            this.bt4.Location = new System.Drawing.Point(36, 295);
+            this.bt4.Location = new System.Drawing.Point(170, 295);
             this.bt4.Name = "bt4";
             this.bt4.Size = new System.Drawing.Size(91, 23);
             this.bt4.TabIndex = 12;
             this.bt4.Text = "Добавить";
             this.bt4.UseVisualStyleBackColor = false;
+            this.bt4.Click += new System.EventHandler(this.bt4_Click);
             // 
             // button3
             // 
@@ -159,12 +162,13 @@ namespace propbd
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button3.ForeColor = System.Drawing.SystemColors.Control;
-            this.button3.Location = new System.Drawing.Point(170, 295);
+            this.button3.Location = new System.Drawing.Point(36, 295);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(91, 23);
             this.button3.TabIndex = 13;
-            this.button3.Text = "Отмена";
+            this.button3.Text = "Отчистить";
             this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // comboBox1
             // 
@@ -174,7 +178,7 @@ namespace propbd
             "Женский"});
             this.comboBox1.Location = new System.Drawing.Point(142, 162);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 23);
+            this.comboBox1.Size = new System.Drawing.Size(119, 23);
             this.comboBox1.TabIndex = 14;
             // 
             // textBox1

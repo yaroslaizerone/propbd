@@ -34,7 +34,6 @@ namespace propbd
             this.Edit_bt = new System.Windows.Forms.Button();
             this.del_bt = new System.Windows.Forms.Button();
             this.Sheare_bt = new System.Windows.Forms.Button();
-            this.Refreash_bt = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -74,6 +73,7 @@ namespace propbd
             this.Newclient_bt.TabIndex = 1;
             this.Newclient_bt.Text = "Новый клиент";
             this.Newclient_bt.UseVisualStyleBackColor = false;
+            this.Newclient_bt.Click += new System.EventHandler(this.Newclient_bt_Click);
             // 
             // Edit_bt
             // 
@@ -87,6 +87,7 @@ namespace propbd
             this.Edit_bt.TabIndex = 2;
             this.Edit_bt.Text = "Редактировать";
             this.Edit_bt.UseVisualStyleBackColor = false;
+            this.Edit_bt.Click += new System.EventHandler(this.Edit_bt_Click);
             // 
             // del_bt
             // 
@@ -114,18 +115,7 @@ namespace propbd
             this.Sheare_bt.TabIndex = 4;
             this.Sheare_bt.Text = "Поиск";
             this.Sheare_bt.UseVisualStyleBackColor = false;
-            // 
-            // Refreash_bt
-            // 
-            this.Refreash_bt.BackColor = System.Drawing.Color.Turquoise;
-            this.Refreash_bt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Refreash_bt.ForeColor = System.Drawing.SystemColors.Control;
-            this.Refreash_bt.Location = new System.Drawing.Point(907, 27);
-            this.Refreash_bt.Name = "Refreash_bt";
-            this.Refreash_bt.Size = new System.Drawing.Size(102, 41);
-            this.Refreash_bt.TabIndex = 5;
-            this.Refreash_bt.Text = "Обновить";
-            this.Refreash_bt.UseVisualStyleBackColor = false;
+            this.Sheare_bt.Click += new System.EventHandler(this.Sheare_bt_Click);
             // 
             // label1
             // 
@@ -243,21 +233,22 @@ namespace propbd
             this.check_lb.AutoSize = true;
             this.check_lb.Location = new System.Drawing.Point(971, 528);
             this.check_lb.Name = "check_lb";
-            this.check_lb.Size = new System.Drawing.Size(38, 15);
+            this.check_lb.Size = new System.Drawing.Size(10, 15);
             this.check_lb.TabIndex = 19;
-            this.check_lb.Text = "label7";
+            this.check_lb.Text = " ";
             // 
             // client_going_bt
             // 
             this.client_going_bt.BackColor = System.Drawing.Color.Turquoise;
             this.client_going_bt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.client_going_bt.ForeColor = System.Drawing.SystemColors.Control;
-            this.client_going_bt.Location = new System.Drawing.Point(771, 27);
+            this.client_going_bt.Location = new System.Drawing.Point(866, 26);
             this.client_going_bt.Name = "client_going_bt";
             this.client_going_bt.Size = new System.Drawing.Size(130, 41);
             this.client_going_bt.TabIndex = 20;
             this.client_going_bt.Text = "Посещения клиента";
             this.client_going_bt.UseVisualStyleBackColor = false;
+            this.client_going_bt.Click += new System.EventHandler(this.client_going_bt_Click);
             // 
             // Mainform
             // 
@@ -278,7 +269,6 @@ namespace propbd
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.Refreash_bt);
             this.Controls.Add(this.Sheare_bt);
             this.Controls.Add(this.del_bt);
             this.Controls.Add(this.Edit_bt);
@@ -301,7 +291,6 @@ namespace propbd
         private System.Windows.Forms.Button Edit_bt;
         private System.Windows.Forms.Button del_bt;
         private System.Windows.Forms.Button Sheare_bt;
-        private System.Windows.Forms.Button Refreash_bt;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;

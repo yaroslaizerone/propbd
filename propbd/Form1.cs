@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace propbd
 {
@@ -16,11 +17,34 @@ namespace propbd
         public Mainform()
         {
             InitializeComponent();
+            using (SqlConnection Con = new SqlConnection(@"Data Source=DESKTOP-TPQE6J4\SQLEXPRESS;Initial Catalog=OPBD;Integrated Security=True"))
+            {
+                Con.Open();
+                String query = "SELECT [ID] = Client.ID, [Фамилия] = Client.LastName, [Имя]=Client.FirstName, [Отчество]= Client.Patronymic,[Пол] = Gender.Name, [Телефон] = Client.Phone, [Email] = Client.Email, [Дата рождения] = Client.Birthday, [Дата регистрации] = Client.RegistrationDate FROM Client INNER JOIN Gender ON Client.GenderCode = Gender.Code";
+                SqlCommand command = new SqlCommand(query, Con);
+                SqlDataReader reader = command.ExecuteReader();
+                DataTable dt = new DataTable();
+                dt.Load(reader);
+                Con.Close();
+
+                if (dt.Rows.Count != 0)
+                {
+                    dataGridView1.Visible = true;
+                    dataGridView1.DataSource = dt;
+                    dataGridView1.Update();
+
+                }
+                else
+                {
+                    dataGridView1.Visible = false;
+                }
+            }
         }
 
         private void del_bt_Click(object sender, EventArgs e)
         {
-
+            Form3 fm3 = new Form3();
+            fm3.Show();
         }
         public static void SetRoundedShape(Control control, int radius)
         {
@@ -67,8 +91,93 @@ namespace propbd
             SetRoundedShape(Edit_bt, 20);
             SetRoundedShape(del_bt, 20);
             SetRoundedShape(Sheare_bt, 20);
-            SetRoundedShape(Refreash_bt, 20);
             SetRoundedShape(client_going_bt, 20);
+            SqlConnection Con = new SqlConnection(@"Data Source=DESKTOP-TPQE6J4\SQLEXPRESS;Initial Catalog=OPBD;Integrated Security=True");
+            Con.Open();
+            String query = "SELECT max(ID) FROM Client";
+            SqlCommand command = new SqlCommand(query, Con);
+            SqlDataReader reader = command.ExecuteReader();
+            reader.Read();
+            int a = reader.GetInt32(0);
+            Con.Close();
+            check_lb.Text = $"0 из{Convert.ToString(a)}";
+        }
+
+        private void Sheare_bt_Click(object sender, EventArgs e)
+        {
+            SqlConnection Con = new SqlConnection(@"Data Source=DESKTOP-TPQE6J4\SQLEXPRESS;Initial Catalog=OPBD;Integrated Security=True");
+            string FIO = FIO_tb.Text;
+            string Numb = telephon_tb.Text;
+            string Email = pocht_tb.Text;
+            string gender = " AND GenderCode = ";
+            string top = "Top ";
+            Con.Open();
+            String query = "SELECT max(ID) FROM Client";
+            SqlCommand command = new SqlCommand(query, Con);
+            SqlDataReader reader = command.ExecuteReader();
+            reader.Read();
+            int a = reader.GetInt32(0);
+            Con.Close();
+            check_lb.Text = $"0 из{Convert.ToString(a)}";
+            if (Convert.ToString(comboBox1.SelectedItem) == "All")
+            { gender = "";}
+            if(Convert.ToString(comboBox1.SelectedItem) == "Мужской")
+            { gender = gender +"1";}
+            if (Convert.ToString(comboBox1.SelectedItem) == "Женский")
+            { gender = gender + "2";}
+            if(Convert.ToString(comboBox2.SelectedItem) == "All")
+            { top = "";
+                check_lb.Text = $"{Convert.ToString(a)} из{Convert.ToString(a)}";
+            }
+            if (Convert.ToString(comboBox2.SelectedItem) == "10")
+            { top = top+"10";
+                check_lb.Text = $"10 из{Convert.ToString(a)}";
+            }
+            if (Convert.ToString(comboBox2.SelectedItem) == "50")
+            { top = top + "50";
+                check_lb.Text = $"50 из{Convert.ToString(a)}";
+            }
+            if (Convert.ToString(comboBox2.SelectedItem) == "100")
+            { top = top + "100";
+                check_lb.Text = $"100 из{Convert.ToString(a)}";
+            }
+            Con.Open();
+            query = $"SELECT {top} [ID] = Client.ID, [Фамилия] = Client.LastName, [Имя] = Client.FirstName, [Отчество] = Client.Patronymic, [Пол] = Gender.Name, [Телефон] = Client.Phone, [Email] = Client.Email, [Дата рождения] = Client.Birthday, [Дата регистрации] = Client.RegistrationDate FROM Client INNER JOIN Gender ON Client.GenderCode = Gender.Code WHERE LastName LIKE '{FIO}%' AND Client.Phone LIKE '%{Numb}%' AND Client.Email LIKE '{Email}%'{gender} OR FirstName LIKE '{FIO}%'AND Client.Phone LIKE '%{Numb}%' AND Client.Email LIKE '{Email}%'{gender} OR Patronymic LIKE '{FIO}%' AND Client.Phone LIKE '%{Numb}%' AND Client.Email LIKE '{Email}%'{gender}";
+            command = new SqlCommand(query, Con);
+            reader = command.ExecuteReader();
+            DataTable dt = new DataTable();
+                dt.Load(reader);
+                Con.Close();
+
+                if (dt.Rows.Count != 0)
+                {
+                    dataGridView1.Visible = true;
+                    dataGridView1.DataSource = dt;
+                    dataGridView1.Update();
+                }
+                else
+                {
+                    dataGridView1.Visible = false;
+                }
+        }
+
+        private void Newclient_bt_Click(object sender, EventArgs e)
+        {
+            AddForm adf = new AddForm();
+            adf.Show();
+        }
+
+        private void client_going_bt_Click(object sender, EventArgs e)
+        {
+            Client_Going fm2 = new Client_Going();
+            fm2.Show();
+        }
+
+        private void Edit_bt_Click(object sender, EventArgs e)
+        {
+            EDIT fm3 = new EDIT();
+            fm3.Show();
         }
     }
-}
+    }
+
